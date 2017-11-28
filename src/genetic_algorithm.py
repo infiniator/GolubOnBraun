@@ -1,5 +1,6 @@
 from random import randrange
 from src.chromosome import Chromosome
+from bisect import bisect_left
 from src.binary_search import binarySearch
 
 population = []  # a list of chromosomes
@@ -42,7 +43,7 @@ def mutation(a):
         addTo = randrange(0, a.numProcs)
     randTask = randrange(0, len(a.schedule[removeFrom]))
     a.schedule[addTo].insert(
-        binarySearch(a.schedule[addTo], a.schedule[removeFrom][randTask]),
+        bisect_left(a.schedule[addTo], a.schedule[removeFrom][randTask]),
         a
     )
     del a.schedule[removeFrom][randTask]
